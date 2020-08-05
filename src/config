@@ -1,0 +1,9 @@
+# Personal Github
+Host github.com
+User serg_miren@mail.ru
+IdentityFile ~/.ssh/id_rsa
+
+# Personal Github
+Host github.com
+User sergmiren@yandex.ru
+IdentityFile ~/.ssh/id_mgnvr
