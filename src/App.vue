@@ -13,59 +13,59 @@
 
 /* @font-face {
   font-family: "Roboto";
-  src: /font/Roboto-Regular.woff2") format("woff2"),
-    /font/Roboto-Regular.woff") format("woff");
+  src: url("/catalog2.0/font/Roboto-Regular.woff2") format("woff2"),
+    url("/catalog2.0/font/Roboto-Regular.woff") format("woff");
   font-weight: 400;
   font-display: fallback;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: /font/Roboto-Bold.woff2") format("woff2"),
-    /font/Roboto-Bold.woff") format("woff");
+  src: url("/catalog2.0/font/Roboto-Bold.woff2") format("woff2"),
+    url("/catalog2.0/font/Roboto-Bold.woff") format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: /font/Roboto-Black.woff2") format("woff2"),
-    /font/Roboto-Black.woff") format("woff");
+  src: url("/catalog2.0/font/Roboto-Black.woff2") format("woff2"),
+    url("/catalog2.0/font/Roboto-Black.woff") format("woff");
   font-weight: 900;
 } */
 
 @font-face {
   font-family: "Montserrat";
-  src: /font/Montserrat-Regular.woff2") format("woff2"),
-    /font/Montserrat-Regular.woff") format("woff");
+  src: url("/catalog2.0/font/Montserrat-Regular.woff2") format("woff2"),
+    url("/catalog2.0/font/Montserrat-Regular.woff") format("woff");
   font-weight: 400;
   font-display: fallback;
 }
 
 @font-face {
   font-family: "Montserrat";
-  src: /font/Montserrat-Bold.woff2") format("woff2"),
-    /font/Montserrat-Bold.woff") format("woff");
+  src: url("/catalog2.0/font/Montserrat-Bold.woff2") format("woff2"),
+    url("/catalog2.0/font/Montserrat-Bold.woff") format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Montserrat";
-  src: /font/Montserrat-ExtraBold.woff2") format("woff2"),
-    /font/Montserrat-ExtraBold.woff") format("woff");
+  src: url("/catalog2.0/font/Montserrat-ExtraBold.woff2") format("woff2"),
+    url("/catalog2.0/font/Montserrat-ExtraBold.woff") format("woff");
   font-weight: 900;
 }
 
 /* @font-face {
   font-family: "Object Sans";
-  src: /font/ObjectSans-Regular.woff2") format("woff2"),
-    /font/ObjectSans-Regular.woff") format("woff");
+  src: url("/catalog2.0/font/ObjectSans-Regular.woff2") format("woff2"),
+    url("/catalog2.0/font/ObjectSans-Regular.woff") format("woff");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Object Sans";
-  src: /font/ObjectSans-Heavy.woff2") format("woff2"),
-    /font/ObjectSans-Heavy.woff") format("woff");
+  src: url("/catalog2.0/font/ObjectSans-Heavy.woff2") format("woff2"),
+    url("/catalog2.0/font/ObjectSans-Heavy.woff") format("woff");
   font-weight: 700;
 } */
 
@@ -84,7 +84,7 @@ body {
 }
 
 body::after {
-  content: /pin.svg") /time.svg") /house.svg") /htc.png");
+  content: url("/catalog2.0/pin.svg") url("/catalog2.0/time.svg") url("/catalog2.0/house.svg") url("/catalog2.0/htc.png");
   display: none;
 }
 
@@ -228,7 +228,7 @@ a {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: /youtube.svg");
+  background-image: url("/catalog2.0/youtube.svg");
   background-size: 35%;
   background-position: center;
   background-repeat: no-repeat;
@@ -526,7 +526,7 @@ p {
   background: transparent;
   border: none;
   cursor: pointer;
-  background-image: /search.svg");
+  background-image: url("/catalog2.0/search.svg");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -537,7 +537,7 @@ p {
 }
 
 .toggle-search.switched {
-  background-image: /close.svg");
+  background-image: url("/catalog2.0/close.svg");
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -555,7 +555,7 @@ p {
   width: 39px;
   height: 39px;
   border: none;
-  background: /close.svg") no-repeat center;
+  background: url("/catalog2.0/close.svg") no-repeat center;
   background-size: 24px;
 }
 
@@ -753,7 +753,7 @@ p.game-desc {
 
 .local-multiplayer,
 .game-local-multiplayer {
-  background: /local_multiplayer2.svg");
+  background: url("/catalog2.0/local_multiplayer2.svg");
   background-size: 40px 40px;
   background-repeat: no-repeat;
   background-position: center;
@@ -1989,7 +1989,7 @@ h1.game-title {
   right: 10px;
   width: 120px;
   height: 120px;
-  background: /woman2.png") center no-repeat;
+  background: url("/catalog2.0/woman2.png") center no-repeat;
   background-size: cover;
 }
 

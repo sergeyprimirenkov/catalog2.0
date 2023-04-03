@@ -5,7 +5,7 @@ module.exports = {
         proxy: 'http://localhost:3000/',
     },
 
-    publicPath: '',
+    publicPath: 'catalog2.0',
 
   //   configureWebpack: {
   //   plugins: [
