@@ -1,169 +1,251 @@
 <template>
   <div>
-    <div class="header header-not-home">
-      <div class="container container-header">
-        <div class="logo">
-          <router-link class="about-link" tag="a" to="/" title="На главную">
-            <img :src="this.publicPath + 'footer.png'" alt="" width="200px" height="auto">
-          </router-link>
-        </div>
-        <div class="header-items">
-          <p class="header-item">
-            Мы находимся: г. Магнитогорск, ул. Ленина, 83 | ТЦ "Континент", 3 этаж
-          </p>
-          <p class="header-item">
-            Мы работаем: ежедневно с 10:00 до 21:00
-          </p>
-        </div>
-        <div class="header-info">
-          <div class="tel">
-            <a href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
-          </div>
-          <div class="social">
-            <a href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">
-              <img :src="this.publicPath + 'vk.svg'" alt="" width="30px" height="30px">
-            </a>
-          </div>
-          <router-link class="link" tag="a" to="/about" title="О нас">О нас</router-link>
-        </div>
-      </div>
-    </div>
-    <div class="container container-game">
-      <div class="breadcrumb-container">
-        <router-link class="link-home" tag="a" to="/" title="Вернуться на главную">
-          ❮ На главную
-        </router-link>
-      </div>
-      <!--       <vk-breadcrumb>
-        <router-link class="home" tag="vk-breadcrumb-item" to="/" title="Вернуться на главную страницу">Главная</router-link>
-        <vk-breadcrumb-item>{{ game.title }}</vk-breadcrumb-item>
-      </vk-breadcrumb> -->
-      <div class="desc">
-        <div class="game-title">
-          <h1 class="game-name">{{ game.title }} <button ref="buttonLike" @click="putLike()" :class="{ liked }" class="like" title="Добавить в избранное / Удалить из избранного">
-            </button></h1>
-        </div>
-        <flash-message transitionName="flash" class="flash-message flashpool"></flash-message>
-        <p><b class="desc">Жанр:</b> {{ game.genre }}</p>
-        <p class="game-description"><b class="desc">Описание:</b> {{ game.description }}</p>
-        <div v-if="game.isLocalMultiplayer" class="local-multiplayer"> 
-          Доступен локальный мультиплеер (несколько игроков за одним телевизором)
-        </div>
-        
-        <agile :options="sliderOptions">
-          <div class="slide">
-            <img :src="game.image1" class="game-image" width="100%" height="auto" v-bind:alt="game.title">
-          </div>
-          <div class="slide">
-            <img :src="game.image2" class="game-image" width="100%" height="auto" v-bind:alt="game.title">
-          </div>
-          <div class="slide">
-            <img :src="game.image3" class="game-image" width="100%" height="auto" v-bind:alt="game.title">
-          </div>
-        </agile>
+    <AppHeader></AppHeader>
 
-        <!-- <img :src="game.image" class="game-image" width="100%" height="auto"> -->
-        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-          <iframe class="embed-responsive-item game-video" :src="game.video" allowfullscreen width="100%"></iframe>
+    <section>
+      <div class="container">
+        <ButtonHome></ButtonHome>
+        <div class="container-game">
+          <div class="game-info">
+            <h1 class="game-title">{{ game.title }}</h1>
+            <p class="game-text"><span class="game-genre">Об игре: </span>{{ game.description }}</p>
+            <p><span class="game-genre">Жанр: </span>{{ game.genre }}</p>
+            <p v-show="game.isLocalMultiplayer"><b>*</b> Доступен локальный кооператив (игра на одном телевизоре)</p>
+            <p><span class="game-genre">Тег: </span> <span class="card-genre">{{ game.tag }}</span></p>
+          </div>
+        </div>
+
+        <div class="swiper main-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
+            <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
+            <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
+            <div class="swiper-slide swiper-slide-youtube" @click="playVideo()">
+              <youtube :video-id="getId()" ref="youtube" @playing="playing" :player-vars="playerVars"></youtube>
+            </div>
+            <!-- <div class="swiper-slide">
+              <div class='swiper-slide' id='youtube-slide'>
+                <div id='player'></div>
+              </div>
+            </div> -->
+          </div>
+
+          <!-- <div class="swiper-pagination"></div> -->
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+
+        <div thumbsSlider="" class="swiper thumbs">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
+            <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
+            <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
+            <div class="swiper-slide swiper-slide-video">
+              <div class="swiper-video-thumb">
+              </div>
+              <img :src="`https://img.youtube.com/vi/${getId()}/maxresdefault.jpg`" alt="">
+            </div>
+          </div>
+        </div>
+        <h2>Похожие игры</h2>
+        <div class="wrapper">
+          <div class="item" v-for="game in showSimilarGames" :key="game.id">
+            <router-link @click.native="changeGame(game)" tag="div" :to="{ name: 'Id', params: { id: game.id } }"
+              class="card" title="Перейти к игре" :style="{
+                'background-image':
+                  `linear-gradient(180deg,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.65) 100%), ` +
+                  'url(' +
+                  game.image1 +
+                  ')',
+              }">
+              <div class="card__header">
+                <button :class="{ liked: wishlistIds.includes(game.id) }" class="like"
+                  @click.stop="putLike($event, game.id)" title="Добавить в избранное / Удалить из избранного">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z"
+                      fill="#fff" />
+                  </svg>
+                </button>
+              </div>
+              <div v-once class="card-desc">
+                <h3 v-text="game.title" class="game-title"></h3>
+                <p v-text="game.description" class="game-desc"></p>
+                <div class="card__footer">
+                  <div class="card-genre" v-text="game.genre"></div>
+                  <div class="card-genre card-tag" v-text="game.tag"></div>
+                </div>
+              </div>
+            </router-link>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer">
-      <div class="container container-footer">
-        <div class="logo">
-          <router-link class="about-link" tag="a" to="/about" title="О нас">
-            <img :src="this.publicPath + 'footer.png'" alt="" width="200px" height="auto">
-          </router-link>
-        </div>
-        <div class="tel">
-          <a href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
-        </div>
-        <div class="social">
-          <a href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">
-            <img :src="this.publicPath + 'vk.svg'" alt="" width="30px" height="30px">
-          </a>
-        </div>
-        <div class="copyright">
-          &#9400; Driv3r, 2017 - 2020 | По всем вопросам обращаться по телефону или в группу ВКонтакте
-        </div>
-        <div class="developer">
-          Дизайн и разработка <a href="https://vk.com/primirenkov" target="_blank"><img :src="this.publicPath + 'ps.svg'" alt="Сергей Примиренков"></a>
-        </div>
-      </div>
-    </div>
+    </section>
+
+    <AppFooter></AppFooter>
   </div>
 </template>
 <script>
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import ButtonHome from "@/components/ButtonHome.vue";
+
 export default {
+  components: {
+    AppHeader, AppFooter, ButtonHome
+  },
   data() {
     return {
-      sitename: 'Driv3r - Каталог игр',
+      sitename: "Driv3r - Каталог игр",
       publicPath: process.env.BASE_URL,
-      game: '',
-      sliderOptions: {
-        navButtons: false,
-        responsive: [{
-          breakpoint: 500,
-          settings: {
-            navButtons: true
-          }
-        }]
+      game: "",
+      wishlistIds: [],
+      playerVars: {
+        controls: 1
       }
-    }
+      // player: null
+    };
   },
   methods: {
-    putLike: function() {
-      this.liked = !this.liked
-
-      if (this.$refs.buttonLike.classList.contains('liked')) {
-        this.flash('Игра удалена из избранного', 'success', {
-          timeout: 1500,
-          important: true
-        })
+    putLike: function (event, gameId) {
+      this.gameId = gameId;
+      this.liked = !this.liked;
+    },
+    changeGame(game) {
+      this.game = game;
+      // this.$router.push({ name: 'Id', params: { id: game.id }});
+      // this.$forceUpdate();
+      // window.location.reload();
+    },
+    // playVideo(event) {
+    //   this.player.playVideo()
+    // },
+    playVideo() {
+      if (this.player.playing) {
+        // alert("stop")
+        this.player.stopVideo()
       } else {
-        this.flash('Игра добавлена в избранное', 'success', {
-          timeout: 1500,
-          important: true
-        })
+        // alert("play")
+        this.player.playVideo()
       }
     },
-    next() {
-      this.$refs.flickity.next();
+    playing() {
+      console.log('\o/ we are watching!!!')
     },
-    previous() {
-      this.$refs.flickity.previous();
+    getId () {
+      return this.$youtube.getIdFromUrl(this.game.video)
     }
   },
   mounted() {
-    // this.game = this.$store.getters.getGameById(this.$route.params.id)
+    // this.$store.dispatch("loadGames");
+    this.wishlistIds = this.$store.state.wishlistIds;
+
+    // const youtubeScriptTag = document.createElement('script');
+    // youtubeScriptTag.src = 'https://www.youtube.com/iframe_api';
+    // document.body.appendChild(youtubeScriptTag);
+    // // var player;
+
+    // window.onYouTubeIframeAPIReady = () => {
+    //   this.player = new YT.Player('player', {
+    //     videoId: this.game.idVideo,
+    //     playerVars: {
+    //       controls: 1
+    //     },
+    //     events: {
+    //       onReady: (event) => {
+    //         const youtubeSlide = document.getElementById('youtube-slide');
+    //         let isVideoPlaying = false;
+
+    //         youtubeSlide.addEventListener('click', () => {
+    //           if (isVideoPlaying) {
+    //             event.target.stopVideo();
+    //           } else {
+    //             event.target.playVideo();
+    //           }
+    //           isVideoPlaying = !isVideoPlaying;
+    //         });
+    //       }
+    //     }
+    //   });
+    // }
+
+    const thumbnails = new Swiper(".thumbs", {
+      loop: true,
+      spaceBetween: 8,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+
+    const swiper = new Swiper('.main-swiper', {
+      // Optional parameters
+      pagination: {
+        el: '.swiper-pagination',
+        type: "bullets",
+        // dynamicBullets: true,
+      },
+      direction: 'horizontal',
+      loop: true,
+      spaceBetween: 8,
+      grabCursor: true,
+      breakpoints: {},
+      keyboard: {
+        enabled: true
+      },
+      // effect: "creative",
+      // creativeEffect: {
+      //   prev: {
+      //     shadow: true,
+      //     translate: ['-20%', 0, -1],
+      //   },
+      //   next: {
+      //     translate: ['100%', 0, 0],
+      //   },
+      // },
+      // If we need pagination
+      // pagination: {
+      //   el: '.swiper-pagination',
+      // },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // on: {
+      //   slideChange: function () {
+      //     player.stopVideo();
+      //   },
+      // },
+      thumbs: {
+        swiper: thumbnails,
+      },
+    });
+    swiper.on('slideChange', function (e) {
+      // this.player.stopVideo();
+    });
   },
-  created: function() {
-    this.game = this.$store.state.games.find(game => {
-      return game.id == this.$route.params.id
-    })
-    // this.game.image = '/' + this.game.image
-
-    //   this.$store.state.articles.find(article => {
-
-    //   return article.id == this.$route.params.id
-
-    // });
-
-    // this.axios.get(this.publicPath + 'games.json').then(response => {
-    //   this.game = response.data.games.filter(data => data.id == this.$route.params.id)[0]
-    //   this.game.image = '/' + this.game.image
-    // })
+  created: function () {
+    this.game = this.$store.state.games.find((game) => {
+      return game.id == this.$route.params.id;
+    });
   },
   computed: {
+    showSimilarGames() {
+      return this.$store.getters.showSimilarGamesByPlatform(this.game.id, this.game.category, this.game.tag);
+    },
     liked: {
       get() {
-        return this.$store.state.wishlistIds.includes(this.game.id)
+        return this.$store.state.wishlistIds.includes(this.gameId);
       },
       set(val) {
-        this.$store.commit(val ? 'addGame' : 'removeGame', this.game.id)
-      }
+        this.$store.commit(val ? "addGame" : "removeGame", this.gameId);
+      },
+    },
+    player() {
+      return this.$refs.youtube.player
     }
-  }
-}
-
+  },
+};
 </script>

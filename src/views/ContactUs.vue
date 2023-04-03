@@ -1,30 +1,26 @@
 <template>
   <div>
-    <div class="header header-not-home">
+    <div v-once class="header">
       <div class="container container-header">
         <div class="logo">
-          <router-link class="about-link" tag="a" to="/" title="На главную">
-            <img :src="this.publicPath + 'footer.png'" width="200px" height="auto" alt="DriV3R">
-          </router-link>
+          <img :src="this.publicPath + 'footer.png'" alt="" width="140px" height="auto" />
         </div>
         <div class="header-items">
           <p class="header-item">
-            Мы находимся: г. Магнитогорск, ул. Ленина, 83 | ТЦ "Континент", 3 этаж
+            <img class="header-icon" :src="this.publicPath + 'pin.svg'" alt="" width="20px" height="20px" />
+            <span class="header-extra-info">Мы находимся: </span>
+            Ленина, 83 | ТЦ "Континент", 3 этаж
           </p>
           <p class="header-item">
-            Мы работаем: ежедневно с 10:00 до 21:00
+            <img class="header-icon" :src="this.publicPath + 'time.svg'" alt="" width="20px" height="20px" />
+            <span class="header-extra-info">Мы работаем: ежедневно </span>
+            с 10:00 до 21:00
           </p>
         </div>
         <div class="header-info">
-          <div class="tel">
-            <a href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
-          </div>
-          <div class="social">
-            <a href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">
-              <img :src="this.publicPath + 'vk.svg'" alt="" width="30px" height="30px">
-            </a>
-          </div>
-          <router-link class="link" tag="a" to="/about" title="О нас">О нас</router-link>
+          <a class="link header-tel" href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
+          <a class="link header-vk" href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">Вк
+          </a>
         </div>
       </div>
     </div>
@@ -35,15 +31,21 @@
         </router-link>
       </div>
       <h1 class="about-header">Забронируйте место</h1>
-      <form action="https://send.pageclip.co/YR97n0GUKhRoDRB8QgxgjFgUXX86SOa5" method="post" class="form-reserve pageclip-form" autocomplete="off">
+      <form action="https://send.pageclip.co/YR97n0GUKhRoDRB8QgxgjFgUXX86SOa5" method="post"
+        class="form-reserve pageclip-form" autocomplete="off">
         <input type="text" name="Имя" value="" placeholder="Имя" class="input-reserve" title="" required>
-        <input type="tel" class="input-reserve" id="tel" name="Телефон" placeholder="Телефон в формате 8-(XXX)-XXX-XX-XX" pattern="8-\([0-9]{3}\)-[0-9]{3}-[0-9]{2}-[0-9]{2}" title="" required>
+        <input type="tel" class="input-reserve" id="tel" name="Телефон" placeholder="Телефон в формате 8-(XXX)-XXX-XX-XX"
+          pattern="8-\([0-9]{3}\)-[0-9]{3}-[0-9]{2}-[0-9]{2}" title="" required>
         <div class="datetime-reserve">
-          <input type="text" id="date" name="Дата" class="input-reserve" placeholder="Дата в формате ДД.ММ" pattern="\d{2}.\d{2}" title="" required>
-          <input type="text" id="time" name="Время" class="input-reserve" placeholder="Время в формате ЧЧ:ММ" title="" pattern="\d{2}:\d{2}" required>
+          <input type="text" id="date" name="Дата" class="input-reserve" placeholder="Дата в формате ДД.ММ"
+            pattern="\d{2}.\d{2}" title="" required>
+          <input type="text" id="time" name="Время" class="input-reserve" placeholder="Время в формате ЧЧ:ММ" title=""
+            pattern="\d{2}:\d{2}" required>
         </div>
-        <input type="number" id="count" name="Количество человек" class="input-reserve" placeholder="Количество человек (максимум - 5)" min="1" max="5" title="" required>
-        <textarea name="Дополнительно" rows="5" placeholder="Дополнительные пожелания" class="input-reserve textarea-reserve" title=""></textarea>
+        <input type="number" id="count" name="Количество человек" class="input-reserve"
+          placeholder="Количество человек (максимум - 5)" min="1" max="5" title="" required>
+        <textarea name="Дополнительно" rows="5" placeholder="Дополнительные пожелания"
+          class="input-reserve textarea-reserve" title=""></textarea>
         <button class="button-reserve button pageclip-form__submit" type="submit">
           <span>Забронировать</span>
         </button>
@@ -65,10 +67,11 @@
           </a>
         </div>
         <div class="copyright">
-          &#9400; Driv3r, 2017 - 2020 | По всем вопросам обращаться по телефону или в группу ВКонтакте
+          &#9400; Driv3r, 2023 | По всем вопросам обращаться по телефону или в группу ВКонтакте
         </div>
         <div class="developer">
-          Дизайн и разработка <a href="https://vk.com/primirenkov" target="_blank"><img :src="this.publicPath + 'ps.svg'" alt="Сергей Примиренков"></a>
+          Дизайн и разработка <a href="https://vk.com/primirenkov" target="_blank"><img :src="this.publicPath + 'ps.svg'"
+              alt="Сергей Примиренков"></a>
         </div>
       </div>
     </div>
@@ -112,11 +115,11 @@ export default {
       placeholderChar: '_'
 
     });
-    showhideTel.addEventListener('focus', function() {
+    showhideTel.addEventListener('focus', function () {
       patternMaskTel.updateOptions({ lazy: false });
       setCaretPosition('tel', 3);
     }, true);
-    showhideTel.addEventListener('blur', function() {
+    showhideTel.addEventListener('blur', function () {
       patternMaskTel.updateOptions({ lazy: true });
       if (!patternMaskTel.masked.rawInputValue) {
         patternMaskTel.value = '';
@@ -129,11 +132,11 @@ export default {
       lazy: true,
       placeholderChar: '_'
     });
-    showhideDate.addEventListener('focus', function() {
+    showhideDate.addEventListener('focus', function () {
       patternMaskDate.updateOptions({ lazy: false });
       setCaretPosition('date', 0);
     }, true);
-    showhideDate.addEventListener('blur', function() {
+    showhideDate.addEventListener('blur', function () {
       patternMaskDate.updateOptions({ lazy: true });
       if (!patternMaskDate.masked.rawInputValue) {
         patternMaskDate.value = '';
@@ -146,11 +149,11 @@ export default {
       lazy: true,
       placeholderChar: '_'
     });
-    showhideTime.addEventListener('focus', function() {
+    showhideTime.addEventListener('focus', function () {
       patternMaskTime.updateOptions({ lazy: false });
       setCaretPosition('time', 0);
     }, true);
-    showhideTime.addEventListener('blur', function() {
+    showhideTime.addEventListener('blur', function () {
       patternMaskTime.updateOptions({ lazy: true });
       if (!patternMaskTime.masked.rawInputValue) {
         patternMaskTime.value = '';
@@ -159,8 +162,8 @@ export default {
 
     let form = document.querySelector('.pageclip-form')
     Pageclip.form(form, {
-      onSubmit: function(event) {},
-      onResponse: function(error, response) {},
+      onSubmit: function (event) { },
+      onResponse: function (error, response) { },
       successTemplate: "<span>Спасибо, заявка успешно отправлена</span><a class='back-home' href='https://mgnvr.github.io/driv3r/#/'>Вернуться на главную</a><button class='form-close'></button>"
     })
   }

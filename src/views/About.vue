@@ -1,95 +1,83 @@
 <template>
   <div>
-    <div class="header header-not-home">
-      <div class="container container-header">
-        <div class="logo">
-          <router-link class="about-link" tag="a" to="/" title="На главную">
-            <img :src="this.publicPath + 'footer.png'" alt="DriV3R" width="200px" height="auto" />
-          </router-link>
-        </div>
-        <div class="header-items">
-          <p
-            class="header-item"
-          >Мы находимся: г. Магнитогорск, ул. Ленина, 83 | ТЦ "Континент", 3 этаж</p>
-          <p class="header-item">Мы работаем: ежедневно с 10:00 до 21:00</p>
-        </div>
-        <div class="header-info">
-          <div class="tel">
-            <a href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
-          </div>
-          <div class="social">
-            <a href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">
-              <img :src="this.publicPath + 'vk.svg'" alt width="30px" height="30px" />
-            </a>
-          </div>
-          <router-link class="link" tag="a" to="/about" title="О нас">О нас</router-link>
-        </div>
-      </div>
-    </div>
-    <div class="container container-about">
-      <div class="breadcrumb-container">
-        <!--         <vk-breadcrumb>
-          <router-link class="home" tag="vk-breadcrumb-item" to="/" title="Вернуться на главную страницу">Главная</router-link>
-          <vk-breadcrumb-item>О нас</vk-breadcrumb-item>
-        </vk-breadcrumb>-->
-        <router-link class="link-home" tag="a" to="/" title="Вернуться на главную">❮ На главную</router-link>
-      </div>
+    <AppHeader></AppHeader>
+    <div class="container">
+      <router-link tag="a" class="link link--home" to="/" title="Вернуться на главную">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.0001 19V14H14.0001V19C14.0001 19.55 14.4501 20 15.0001 20H18.0001C18.5501 20 19.0001 19.55 19.0001 19V12H20.7001C21.1601 12 21.3801 11.43 21.0301 11.13L12.6701 3.59997C12.2901 3.25997 11.7101 3.25997 11.3301 3.59997L2.9701 11.13C2.6301 11.43 2.8401 12 3.3001 12H5.0001V19C5.0001 19.55 5.4501 20 6.0001 20H9.0001C9.5501 20 10.0001 19.55 10.0001 19Z"
+            fill="#4d1523" />
+        </svg>
+      </router-link>
       <h1 class="about-header">О нас</h1>
-      <p>
-        DriV3R - это то место, где Вы пересекаете грань реальности, оказываетесь в совершенно новых мирах и становитесь их частью, а не только наблюдателями.
-        <br />У нас Вы сможете испытать самые последние технологии, которые используются для погружения в виртуальную реальность.
+      <p class="about-text">
+        DriV3R - это то место, где Вы пересекаете грань реальности, оказываетесь в совершенно новых мирах и становитесь их
+        частью, а не только наблюдателями.</p>
+      <p class="about-text">
+        У нас Вы сможете испытать самые последние технологии, которые используются для погружения в виртуальную
+        реальность.
       </p>
-      <div class="features">
-        <div class="feature-item">
-          <h2 class="game-platform">HTC</h2>
-          <img
-            :src="this.publicPath + 'htc_vive.png'"
-            alt="HTC"
-            width="100%"
-            height="auto"
-            class="feature-picture"
-          />
-          <p
-            class="feature-desc"
-          >VIVE изначально был задуман как система, позволяющая получить опыт полного погружения в виртуальную среду с возможностью перемещения в пространстве.</p>
-          <p
-            class="game-count"
-          >Игр на платформе: {{ this.$store.state.games.filter(game => game.category==='htc').length }}</p>
+
+      <div class="platforms">
+        <div class="platform platform--htc">
+          <div class="platform-img">
+            <img :src="this.publicPath + 'htc.png'" alt="HTC" width="100%" height="auto" />
+          </div>
+          <div class="platform-info">
+            <div class="platform-info-wrapper">
+              <h2 class="platform-name">HTC Vive</h2>
+              <p class="platform-desc">Прими участие в гладиаторских сражениях, стань главным героем боевика, примерь
+                костюм
+                супергероя, останови зомби-апокалипсис, покатайся на американских горках и многое другое.</p>
+              <p class="platform-count-games">
+                Игр на платформе: {{ this.$store.state.games.filter(game => game.category === 'htc').length }}
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="feature-item">
-          <h2 class="game-platform">PSVR</h2>
-          <img
-            :src="this.publicPath + 'ps_vr.png'"
-            alt="PSVR"
-            width="100%"
-            height="auto"
-            class="feature-picture"
-          />
-          <p
-            class="feature-desc"
-          >К особенностям представленного шлема необходимо отнести наличие системы 3D-обработки звука, социального экрана, кинематографического режима работы.</p>
-          <p
-            class="game-count"
-          >Игр на платформе: {{ this.$store.state.games.filter(game => game.category==='psvr').length }}</p>
+        <div class="platform platform--psvr">
+          <div class="platform-img">
+            <img :src="this.publicPath + 'psvr.png'" alt="HTC" width="100%" height="auto" />
+          </div>
+          <div class="platform-info">
+            <div class="platform-info-wrapper">
+              <h2 class="platform-name">PSVR</h2>
+              <p class="platform-desc">PlayStation VR вместе с PlayStation 4 и рулевой установкой позволяет почувствовать
+                себя участником настоящей гонки с болельщиками на трибунах, и проработанной до мельчайших деталей
+                природой.</p>
+              <p class="platform-count-games">
+                Игр на платформе: {{ this.$store.state.games.filter(game => game.category === 'psvr').length }}
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="feature-item">
-          <h2 class="game-platform">PS4</h2>
-          <img :src="this.publicPath + 'ps_4.png'" alt="PS4" width="100%" height="auto" />
-          <p
-            class="feature-desc"
-          >Вселенная игрового киберпространства открыта перед вами! Приставка Sony PlayStation 4 даст вам лучший игровой опыт с передовой графикой нового поколения.</p>
-          <p
-            class="game-count"
-          >Игр на платформе: {{ this.$store.state.games.filter(game => game.category==='ps').length }}</p>
+        <div class="platform platform--ps5">
+          <div class="platform-img">
+            <img :src="this.publicPath + 'ps5.png'" alt="HTC" width="100%" height="auto" />
+          </div>
+          <div class="platform-info">
+            <div class="platform-info-wrapper">
+              <h2 class="platform-name">PS5</h2>
+              <p class="platform-desc">Консоль Sony PlayStation 5 даст вам лучший игровой опыт с передовой графикой
+                последнего поколения. Предусмотрена возможность локального кооператива или игра по сети на несколько
+                человек.</p>
+              <p class="platform-count-games">
+                Игр на платформе: {{ this.$store.state.games.filter(game => game.category === 'ps5').length }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      <iframe class="video-veshalka"
+        src="https://vk.com/video_ext.php?oid=-68399984&id=456239162&hash=ddc772ca94cd0b29&hd=2" width="100%" height="480"
+        allow="encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
       <h2>Прайс</h2>
       <table class="uk-table uk-table-striped">
         <thead>
           <tr>
             <th>HTC</th>
             <th>PSVR</th>
-            <th>PS4</th>
+            <th>PS5</th>
           </tr>
         </thead>
         <tbody>
@@ -110,7 +98,7 @@
           </tr>
           <tr>
             <td>60 мин - 600₽</td>
-            <td>60 мин -600₽</td>
+            <td>60 мин - 600₽</td>
             <td>120 мин - 500₽</td>
           </tr>
           <tr>
@@ -127,51 +115,85 @@
             <td colspan="3" class="cell-rent">Аренда центра - 2000₽/час</td>
           </tr>
         </tbody>
-      </table>
-      <!--       <vk-table :data="data" striped>
+        <thead>
+          <tr>
+            <th colspan="3">Выездное мероприятие (MINI)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3"><b>120 мин - 4000₽ (каждый последующий час - 1000₽)</b>
+              <ul style="margin: 0px; padding-left: 20px;">
+                <li>Платформа HTC Vive или PSVR на выбор</li>
+                <li>Телевизор для зрителей 32"</li>
+                <li>Оператор</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th colspan="3">Выездное мероприятие (STANDART)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3"><b>120 мин - 6000₽ (каждый последующий час - 1500₽)</b>
+              <ul style="margin: 0px; padding-left: 20px;">
+                <li>
+                  Платформа HTC Vive или PlayStation VR + рулевая установка на
+                  выбор
+                </li>
+                <li>Телевизор для зрителей 40"</li>
+              <li>Профессиональная акустика Sony</li>
+              <li>Оператор</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th colspan="3">Выездное мероприятие (MAXI)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="3"><b>120 мин - 9000₽ (каждый последующий час - 2000₽)</b>
+            <ul style="margin: 0px; padding-left: 20px;">
+              <li>
+                2 Платформы HTC Vive или PlayStation VR + 2 рулевые установки
+                на выбор
+              </li>
+              <li>2 Телевизора для зрителей 40"</li>
+              <li>Профессиональная акустика Sony</li>
+              <li>2 Оператора</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--       <vk-table :data="data" striped>
         <vk-table-column title="HTC" cell="htc"></vk-table-column>
         <vk-table-column title="PSVR" cell="psvr"></vk-table-column>
         <vk-table-column title="PS4" cell="ps4"></vk-table-column>
       </vk-table>-->
-      <h2>Мы Вконтакте</h2>
-      <p>Конкурсы, акции, новости игровой индустрии в нашей группе ВКонтакте. Подпишись! 😉</p>
-      <div id="vk_groups"></div>
-      <h2>Как проехать</h2>
-      <p>Мы находимся по адресу: г. Магнитогорск, ул. Ленина, 83 | ТЦ "Континент", 3 этаж, рядом с залом игровых автоматов Sky Game | тел. 8-9000-93-93-92</p>
-      <!-- <iframe style="margin-bottom: 20px" src="https://yandex.ru/map-widget/v1/-/CCrrEBOI" width="100%" height="300" frameborder="0" allowfullscreen="true"></iframe> -->
-      <div id="2gisWidget"></div>
-    </div>
-    <div class="footer">
-      <div class="container container-footer">
-        <div class="logo">
-          <router-link class="about-link" tag="a" to="/about" title="О нас">
-            <img :src="this.publicPath + 'footer.png'" alt="DriV3R" width="200px" height="auto" />
-          </router-link>
-        </div>
-        <div class="tel">
-          <a href="tel: +79000939392" title="Позвонить нам">+7 (900) 093-93-92</a>
-        </div>
-        <div class="social">
-          <a href="https://vk.com/mgnvr" target="_blank" title="Мы ВКонтакте">
-            <img :src="this.publicPath + 'vk.svg'" alt width="30px" height="30px" />
-          </a>
-        </div>
-        <div
-          class="copyright"
-        >&#9400; Driv3r, 2017 - 2020 | По всем вопросам обращаться по телефону или в группу ВКонтакте</div>
-        <div class="developer">
-          Дизайн и разработка
-          <a href="https://vk.com/primirenkov" target="_blank">
-            <img :src="this.publicPath + 'ps.svg'" alt="Сергей Примиренков" />
-          </a>
-        </div>
-      </div>
-    </div>
+    <h2>Мы Вконтакте</h2>
+    <p>Конкурсы, акции, новости игровой индустрии в нашей группе ВКонтакте. Подпишись! 😉</p>
+    <div id="vk_groups"></div>
+    <h2>Как проехать</h2>
+    <p>Мы находимся по адресу: г. Магнитогорск, ул. Ленина, 83 | ТЦ "Континент", 3 этаж, рядом с залом игровых автоматов
+      Sky Game | тел. 8-9000-93-93-92</p>
+    <!-- <iframe style="margin-bottom: 20px" src="https://yandex.ru/map-widget/v1/-/CCrrEBOI" width="100%" height="300" frameborder="0" allowfullscreen="true"></iframe> -->
+    <div id="2gisWidget"></div>
   </div>
-</template>
+  <AppFooter></AppFooter>
+</div></template>
 <script>
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
 export default {
   name: "about",
+  components: { AppHeader, AppFooter },
   data() {
     return {
       sitename: "Driv3r - Каталог игр",
