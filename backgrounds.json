@@ -1,0 +1,100 @@
+{
+    "backgrounds": [
+    {
+      "id": 1,
+      "src": "backgrounds/city/new_york.jpg",
+      "alt": "Нью-Йорк",
+      "theme": "город"
+    },
+    {
+      "id": 2,
+      "src": "backgrounds/city/paris.jpg",
+      "alt": "Париж",
+      "theme": "город"
+    },
+    {
+      "id": 3,
+      "src": "backgrounds/city/street.jpg",
+      "alt": "Улочка",
+      "theme": "город"
+    },
+    {
+      "id": 4,
+      "src": "backgrounds/city/disney.jpg",
+      "alt": "Дисней",
+      "theme": "город"
+    },
+    {
+      "id": 5,
+      "src": "backgrounds/city/europe.jpg",
+      "alt": "Европа",
+      "theme": "город"
+    },
+    {
+      "id": 6,
+      "src": "backgrounds/city/venice.jpg",
+      "alt": "Венеция",
+      "theme": "город"
+    },
+    {
+      "id": 7,
+      "src": "backgrounds/city/singapore.jpg",
+      "alt": "Сингапур",
+      "theme": "город"
+    },
+    {
+      "id": 8,
+      "src": "backgrounds/city/washington.jpg",
+      "alt": "Вашингтон",
+      "theme": "город"
+    },
+    {
+      "id": 9,
+      "src": "backgrounds/city/moscow.jpg",
+      "alt": "Москва",
+      "theme": "город"
+    },
+    {
+      "id": 10,
+      "src": "backgrounds/nature/park.jpg",
+      "alt": "Парк",
+      "theme": "природа"
+    },
+    {
+      "id": 11,
+      "src": "backgrounds/nature/beach.jpg",
+      "alt": "Пляж",
+      "theme": "природа"
+    },
+    {
+      "id": 12,
+      "src": "backgrounds/nature/forest.jpg",
+      "alt": "Лес",
+      "theme": "природа"
+    },
+    {
+      "id": 13,
+      "src": "backgrounds/nature/clouds.jpg",
+      "alt": "Облака",
+      "theme": "природа"
+    },
+    {
+      "id": 14,
+      "src": "backgrounds/nature/mountain.jpg",
+      "alt": "Горы",
+      "theme": "природа"
+    },
+    {
+      "id": 15,
+      "src": "backgrounds/nature/waterfall.jpg",
+      "alt": "Водопад",
+      "theme": "природа"
+    },
+    {
+      "id": 16,
+      "src": "backgrounds/nature/japan_garden.jpg",
+      "alt": "Японский сад",
+      "theme": "природа"
+    }
+  ]
+}
