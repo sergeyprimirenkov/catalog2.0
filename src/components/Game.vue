@@ -15,39 +15,36 @@
           </div>
         </div>
 
-        <div class="swiper main-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
-            <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
-            <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
-            <div class="swiper-slide swiper-slide-youtube" @click="playVideo()">
-              <youtube :video-id="getId()" ref="youtube" @playing="playing" :player-vars="playerVars"></youtube>
-            </div>
-            <!-- <div class="swiper-slide">
-              <div class='swiper-slide' id='youtube-slide'>
-                <div id='player'></div>
+        <div class="gallery-swiper">
+          <div class="swiper main-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
+              <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
+              <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
+              <div class="swiper-slide swiper-slide-youtube" @click="playVideo()">
+                <youtube :video-id="getId()" ref="youtube" :player-vars="playerVars"></youtube>
               </div>
-            </div> -->
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
           </div>
 
-          <!-- <div class="swiper-pagination"></div> -->
-
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-
-        <div thumbsSlider="" class="swiper thumbs">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
-            <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
-            <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
-            <div class="swiper-slide swiper-slide-video">
-              <div class="swiper-video-thumb">
+          <div thumbsSlider="" class="swiper thumbs">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img :src="game.image1" :alt="game.title"></div>
+              <div class="swiper-slide"><img :src="game.image2" :alt="game.title"></div>
+              <div class="swiper-slide"><img :src="game.image3" :alt="game.title"></div>
+              <div class="swiper-slide swiper-slide-video">
+                <div class="swiper-video-thumb">
+                </div>
+                <!-- <img :src="`https://img.youtube.com/vi/${getId()}/hqdefault.jpg`" :alt="game.title"> -->
+                <img :src="game.image1" :alt="game.title">
               </div>
-              <img :src="`https://img.youtube.com/vi/${getId()}/maxresdefault.jpg`" alt="">
             </div>
           </div>
         </div>
+
         <h2>Похожие игры</h2>
         <div class="wrapper">
           <div class="item" v-for="game in showSimilarGames" :key="game.id">
@@ -56,7 +53,7 @@
                 'background-image':
                   `linear-gradient(180deg,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.65) 100%), ` +
                   'url(' +
-                  game.image1 +
+                  game.thumbnail +
                   ')',
               }">
               <div class="card__header">
@@ -104,7 +101,6 @@ export default {
       playerVars: {
         controls: 1
       }
-      // player: null
     };
   },
   methods: {
@@ -114,13 +110,7 @@ export default {
     },
     changeGame(game) {
       this.game = game;
-      // this.$router.push({ name: 'Id', params: { id: game.id }});
-      // this.$forceUpdate();
-      // window.location.reload();
     },
-    // playVideo(event) {
-    //   this.player.playVideo()
-    // },
     playVideo() {
       if (this.player.playing) {
         // alert("stop")
@@ -130,10 +120,10 @@ export default {
         this.player.playVideo()
       }
     },
-    playing() {
-      console.log('\o/ we are watching!!!')
-    },
-    getId () {
+    // playing() {
+    //   console.log('\o/ we are watching!!!')
+    // },
+    getId() {
       return this.$youtube.getIdFromUrl(this.game.video)
     }
   },

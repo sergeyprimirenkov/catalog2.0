@@ -59,7 +59,7 @@
         <div :class="{ 'container-input-only': selectedPlatform == 'мои' }" class="container-input show"
           ref="containerInput">
           <vs-input placeholder="Поиск игры..." type="text" v-model="search" class="search-input" autocomplete="off"
-            @input="closeSearchGame">
+            @input="closeSearchGame" v-on:keyup.esc="clearSearch">
           </vs-input>
           <span class="search-icon" ref="closeSearch" @click="clearSearch"></span>
         </div>
@@ -90,7 +90,7 @@
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.35) 75%,
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.65) 100%), ` +
                       'url(' +
-                      game.image1 +
+                      game.thumbnail +
                       ')',
                   }">
                   <div class="card__header">
@@ -135,7 +135,7 @@
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.35) 75%,
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.65) 100%), ` +
                       'url(' +
-                      game.image1 +
+                      game.thumbnail +
                       ')',
                   }">
                   <div class="card__header">
@@ -177,7 +177,7 @@
                     'background-image':
                       `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.65) 100%), ` +
                       'url(' +
-                      game.image1 +
+                      game.thumbnail +
                       ')',
                   }">
                   <div class="card__header">
@@ -230,7 +230,7 @@
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.35) 75%,
                                                                                                                                                                                                                                rgba(0, 0, 0, 0.65) 100%), ` +
                       'url(' +
-                      game.image1 +
+                      game.thumbnail +
                       ')',
                   }">
                   <div class="card__header">
@@ -287,6 +287,7 @@ export default {
         "хоррор",
         "спорт",
         "квест",
+        "песочница",
         "стратегия",
         "головоломка",
         "аттракцион",
@@ -301,6 +302,7 @@ export default {
         "гонка",
         "хоррор",
         "квест",
+        "песочница",
         "аттракцион",
         "приключение",
         "многопользовательская",
@@ -314,6 +316,7 @@ export default {
         "файтинг",
         "песочница",
         "симулятор",
+        "приключение",
         "интерактивное кино",
         "многопользовательская",
       ],

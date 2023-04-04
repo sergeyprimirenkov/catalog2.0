@@ -120,11 +120,7 @@ section {
 input,
 select {
   width: 100% !important;
-  font-family: "Object Sans", sans-serif !important;
-}
-
-input::placeholder {
-  color: red !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .header {
@@ -273,9 +269,11 @@ a {
   }
 }
 
-@media (min-width: 1300px) {
-  .swiper {
-    width: 1160px;
+@media (min-width: 992px) {
+  .gallery-swiper {
+    width: 65%;
+    max-width: 1160px;
+    margin: 0 auto;
   }
 }
 
@@ -314,6 +312,11 @@ p {
   /* line-height: 1.3; */
 }
 
+.vs-select__input,
+.vs-input {
+  font-size: 14px;
+}
+
 .vs-input {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -327,30 +330,6 @@ p {
   background: #000;
 }
 
-.vs-input::placeholder {
-  color: red !important;
-}
-
-.vs-input::-webkit-input-placeholder {
-  color: red !important;
-}
-
-.vs-input:-webkit-input-placeholder {
-  color: red !important;
-}
-
-.vs-input:-moz-placeholder {
-  color: red !important;
-}
-
-.vs-input::-moz-placeholder {
-  color: red !important;
-}
-
-.vs-input:-ms-input-placeholder {
-  color: red !important;
-}
-
 .vs-input-content {
   border-radius: 6px;
 }
@@ -358,7 +337,13 @@ p {
 .vs-input-content label {
   color: grey;
   font-size: 14px;
+  font-weight: 400;
+  opacity: 1;
 }
+
+/* .vs-input-content:hover label {
+  color: white;
+} */
 
 .select-genre-container {
   display: flex;
